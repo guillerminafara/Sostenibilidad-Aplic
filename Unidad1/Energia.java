@@ -17,11 +17,13 @@ public class Energia {
         String codigo;
         String territorio;
         Double valor;
+        String anio;
 
-        public Municipio(String codigo, String territorio, Double valor) {
+        public Municipio(String codigo, String territorio, Double valor, String anio) {
             this.codigo = codigo;
             this.territorio = territorio;
             this.valor = valor;
+            this.anio= anio;
         }
     }
 
@@ -40,12 +42,12 @@ public class Energia {
                 String codigo = fragmento[2] + " - ";
                 String territorio = fragmento[3] + " - ";
                 String valor = fragmento[4];
+                String anio= fragmento[0];
 
-                // System.out.println(codigo + territorio + valor);
                 if (!valor.isEmpty() && !valor.contains("-")) {
                     double mediana = Double.parseDouble(valor);
 
-                    listaValorMunicipios.add(new Municipio(codigo, territorio, mediana));
+                    listaValorMunicipios.add(new Municipio(codigo, territorio, mediana, anio));
                     listaValorMunicipios.sort((a, b) -> Double.compare(a.valor, b.valor));
 
                 }
@@ -53,8 +55,7 @@ public class Energia {
             int i = 0;
             for (Municipio municipio : listaValorMunicipios.reversed()) {
                 if (i < 3) {
-                    System.out.println("codigo: " + municipio.codigo + "Territorio:  " + municipio.territorio + "valor: " + municipio.valor);
-
+                    System.out.println("Año: "+municipio.anio+" codigo: " + municipio.codigo + "Territorio:  " + municipio.territorio + "valor: " + municipio.valor);
                 }
                 i++;
 
