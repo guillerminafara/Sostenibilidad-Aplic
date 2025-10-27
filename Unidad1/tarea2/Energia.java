@@ -16,10 +16,10 @@ public class Energia {
 
         String codigo;
         String territorio;
-        Double valor;
+        int valor;
         String anio;
 
-        public Municipio(String codigo, String territorio, Double valor, String anio) {
+        public Municipio(String codigo, String territorio, int valor, String anio) {
             this.codigo = codigo;
             this.territorio = territorio;
             this.valor = valor;
@@ -46,18 +46,16 @@ public class Energia {
                 String anio = fragmento[0];
 
                 if (!valor.isEmpty() && !valor.contains("-")) {
-                    double mediana = Double.parseDouble(valor);
+                    int mediana = Integer.parseInt(valor);
 
                     listaValorMunicipios.add(new Municipio(codigo, territorio, mediana, anio));
-                    listaValorMunicipios.sort((a, b) -> Double.compare(a.valor, b.valor));
-
+                    listaValorMunicipios.sort((municipioA, municipioB) -> Integer.compare(municipioA.valor, municipioB.valor));
                 }
             }
             // int i = 0;
             // for (Municipio municipio : listaValorMunicipios.reversed()) {
             //     if (i < cant) {
-            //         System.out.printf("%d - codigo: %s Territorio: %s  valor: %.0f \n",contador, municipio.codigo, municipio.territorio, municipio.valor);
-            //       
+            //         System.out.printf("%d - codigo: %s Territorio: %s  valor: %d \n",contador, municipio.codigo, municipio.territorio, municipio.valor);
             //     }
             //     i++;
             //     contador++;
@@ -66,10 +64,9 @@ public class Energia {
 
             listaValorMunicipios.stream()
                     .limit(cant)
-                    .forEach(m ->System.out.printf("codigo: %s Territorio: %s  valor: %.0f \n",m.codigo, m.territorio, m.valor));
+                    .forEach(m ->System.out.printf("codigo: %s Territorio: %s  valor: %d \n",m.codigo, m.territorio, m.valor));
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
