@@ -28,10 +28,9 @@ public class Energia {
     }
 
     public static void mediana(String archivoCsv, String cantidad) throws IOException {
-        System.out.println("El top 3 medianas de consumo por Municipios:");
+        System.out.printf("El top %s medianas de consumo por Municipios:\n", cantidad);
         // String archivoCsv = ".\\viviendas.csv";
         int cant = Integer.parseInt(cantidad);
-        int contador = 1;
         try {
 
             BufferedReader br = new BufferedReader(new FileReader(archivoCsv));
@@ -49,25 +48,25 @@ public class Energia {
                     int mediana = Integer.parseInt(valor);
 
                     listaValorMunicipios.add(new Municipio(codigo, territorio, mediana, anio));
-                    listaValorMunicipios.sort((municipioA, municipioB) -> Integer.compare(municipioA.valor, municipioB.valor));
+                    listaValorMunicipios.sort((municipioA, municipioB) -> Integer.compare(municipioB.valor, municipioA.valor));
                 }
             }
-            // int i = 0;
-            // for (Municipio municipio : listaValorMunicipios.reversed()) {
-            //     if (i < cant) {
-            //         System.out.printf("%d - codigo: %s Territorio: %s  valor: %d \n",contador, municipio.codigo, municipio.territorio, municipio.valor);
-            //     }
-            //     i++;
-            //     contador++;
-            // }
-
 
             listaValorMunicipios.stream()
                     .limit(cant)
-                    .forEach(m ->System.out.printf("codigo: %s Territorio: %s  valor: %d \n",m.codigo, m.territorio, m.valor));
+                    .forEach(m -> System.out.printf("codigo: %s Territorio: %s  valor: %d \n", m.codigo, m.territorio, m.valor));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 }
+    //   int i = 0;
+    //     int contador = 1;
+    //     for (Municipio municipio : listaValorMunicipios.reversed()){
+    //             if (i < cant) {
+    //                 System.out.printf("%d - codigo: %s Territorio: %s  valor: %d \n",contador, municipio.codigo, municipio.territorio, municipio.valor);
+    //             }
+    //              i++;
+    //              contador++;
+    //          }
